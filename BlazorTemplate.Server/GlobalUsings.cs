@@ -1,2 +1,1 @@
-﻿global using Microsoft.AspNetCore.Hosting.StaticWebAssets;
-global using Microsoft.AspNetCore.ResponseCompression;
+﻿global using BlazorTemplate.IoC;

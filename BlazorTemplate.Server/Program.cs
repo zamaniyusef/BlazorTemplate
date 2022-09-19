@@ -1,6 +1,6 @@
 ﻿var builder = WebApplication.CreateBuilder(args);
 
-StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
+DependencyContainer.RegisterServices(builder.Services, builder.Configuration);
 
 builder.Services.AddControllersWithViews();
 
@@ -20,6 +20,10 @@ else
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseBlazorFrameworkFiles();
 
