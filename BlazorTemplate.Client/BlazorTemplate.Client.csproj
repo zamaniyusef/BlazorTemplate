@@ -16,4 +16,8 @@
 		<ProjectReference Include="..\BlazorTemplate.Shared\BlazorTemplate.Shared.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\fonts" />
+	</ItemGroup>
+
 </Project>
