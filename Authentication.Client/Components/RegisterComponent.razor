@@ -1,0 +1,150 @@
+﻿@if (ShowRegistrationErrors)
+{
+    <MudAlert Severity="Severity.Error">
+        @foreach (var error in Errors)
+        {
+            <p>@error</p>
+        }
+    </MudAlert>
+}
+<EditForm Model="@_model"
+          OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator/>
+    <MudGrid>
+        <MudItem xs="12" sm="12" md="6" lg="4" xl="3" xxl="3">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.body2"
+                             Align="Align.Center"
+                             Color="Color.Tertiary">
+                        لطفا برای عضویت در سایت فرم زیر را تکمیل کنید
+                    </MudText>
+                    <MudDivider Class="mt-3 mb-3"/>
+                    <MudTextField Label="نام"
+                                  Variant="Variant.Outlined"
+                                  @bind-Value="@_model.FirstName"
+                                  For="@(() => _model.FirstName)"/>
+                    <MudTextField Label="نام‌خانوادگی"
+                                  Variant="Variant.Outlined"
+                                  Class="mt-3"
+                                  @bind-Value="@_model.LastName"
+                                  For="@(() => _model.LastName)"/>
+                    @*TODO: Add server side validation for phone number *@
+                    <MudTextField Label="موبایل"
+                                  Variant="Variant.Outlined"
+                                  Class="mt-3"
+                                  @bind-Value="@_model.PhoneNumber"
+                                  For="@(() => _model.PhoneNumber)"/>
+                    <MudTextField Label="کلمه‌عبور"
+                                  Variant="Variant.Outlined"
+                                  Class="mt-3"
+                                  @bind-Value="@_model.Password"
+                                  For="@(() => _model.Password)"
+                                  InputType="@_passwordInput"
+                                  Adornment="Adornment.End"
+                                  AdornmentIcon="@_passwordInputIcon"
+                                  OnAdornmentClick="ShowPassword"
+                                  AdornmentAriaLabel="Show Password"/>
+                    <MudTextField Label="تکرار کلمه‌عبور"
+                                  Variant="Variant.Outlined"
+                                  Class="mt-3"
+                                  @bind-Value="@_model.PasswordConfirm"
+                                  For="@(() => _model.PasswordConfirm)"
+                                  InputType="@_passwordInput"
+                                  Adornment="Adornment.End"
+                                  AdornmentIcon="@_passwordInputIcon"
+                                  OnAdornmentClick="ShowPassword"
+                                  AdornmentAriaLabel="Show Password"/>
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Disabled="@Processing"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               FullWidth="true"
+                               Size="Size.Large"
+                               Class="ml-auto mt-3">
+                        @if (Processing)
+                        {
+                            <MudProgressCircular Class="ms-n1"
+                                                 Size="Size.Small"
+                                                 Indeterminate="true"/>
+                            <MudText Class="ms-2">در حال پردازش</MudText>
+                        }
+                        else
+                        {
+                            <MudIcon Icon="@Icons.Filled.PersonAddAlt1"
+                                     Class="ms-n1"
+                                     Size="Size.Small"
+                                     Indeterminate="true"/>
+                            <MudText Class="ms-2">عضویت</MudText>
+                        }
+                    </MudButton>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+
+@code {
+
+    #region Dependencies
+
+    [Inject]
+    public IAuthenticationService AuthenticationService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    #endregion
+
+    #region PrivateProp
+
+    private RegisterViewModel _model = new();
+    private bool ShowRegistrationErrors { get; set; }
+    private IEnumerable<string> Errors { get; set; }
+    private bool Processing { get; set; }
+    private bool _isShow;
+    private InputType _passwordInput = InputType.Password;
+    private string _passwordInputIcon = Icons.Filled.VisibilityOff;
+
+    #endregion
+
+    #region Events
+
+    private async void OnValidSubmit(EditContext context)
+    {
+        Processing = true;
+        ShowRegistrationErrors = false;
+        var result = await AuthenticationService.RegisterUser(_model);
+        if (!result.IsSuccessfulRegistration)
+        {
+            Errors = result.Errors;
+            ShowRegistrationErrors = true;
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        Processing = false;
+        StateHasChanged();
+    }
+
+    private void ShowPassword()
+    {
+        @if (_isShow)
+        {
+            _isShow = false;
+            _passwordInputIcon = Icons.Filled.VisibilityOff;
+            _passwordInput = InputType.Password;
+        }
+        else
+        {
+            _isShow = true;
+            _passwordInputIcon = Icons.Filled.Visibility;
+            _passwordInput = InputType.Text;
+        }
+    }
+
+    #endregion
+
+}

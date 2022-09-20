@@ -8,5 +8,6 @@ public static class DependencyContainer
         ServiceExtensions.AddIdentity(services);
         ServiceExtensions.ChangeDefaultClaim(services);
         ServiceExtensions.AddAuthentication(services, configuration);
+        ServiceExtensions.AddMapper(services);
     }
 }

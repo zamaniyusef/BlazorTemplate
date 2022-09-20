@@ -1,4 +1,5 @@
 ﻿global using System.Text;
+global using System.Reflection;
 global using System.Security.Claims;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,3 +11,4 @@ global using Microsoft.IdentityModel.Tokens;
 global using BlazorTemplate.Core.Entities.Auth;
 global using BlazorTemplate.DataAccess.Context;
 global using BlazorTemplate.IoC.Extensions;
+global using BlazorTemplate.Shared.Mappings;

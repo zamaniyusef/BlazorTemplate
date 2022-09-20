@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorTemplate.DataAccess",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorTemplate.IoC", "BlazorTemplate.IoC\BlazorTemplate.IoC.csproj", "{4BF6A645-9897-4637-8CA4-CA935D32F8FD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{EA78EDAB-3CF3-4BD3-AAE6-BE97789CAAEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Client", "Authentication.Client\Authentication.Client.csproj", "{00734CDC-A8AD-4201-A9C5-43365F82AE85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,11 +49,19 @@ Global
 		{4BF6A645-9897-4637-8CA4-CA935D32F8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BF6A645-9897-4637-8CA4-CA935D32F8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BF6A645-9897-4637-8CA4-CA935D32F8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00734CDC-A8AD-4201-A9C5-43365F82AE85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00734CDC-A8AD-4201-A9C5-43365F82AE85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00734CDC-A8AD-4201-A9C5-43365F82AE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00734CDC-A8AD-4201-A9C5-43365F82AE85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F435C508-5633-43E2-BED6-B61AECD70C7B}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C16291B-0432-41A3-A75E-2E6DEE175BFF} = {EA78EDAB-3CF3-4BD3-AAE6-BE97789CAAEF}
+		{00734CDC-A8AD-4201-A9C5-43365F82AE85} = {EA78EDAB-3CF3-4BD3-AAE6-BE97789CAAEF}
 	EndGlobalSection
 EndGlobal

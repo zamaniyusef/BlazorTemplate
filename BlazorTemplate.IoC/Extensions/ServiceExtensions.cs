@@ -47,4 +47,9 @@ public static class ServiceExtensions
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
     }
+
+    public static void AddMapper(IServiceCollection services)
+    {
+        services.AddAutoMapper(typeof(MappingProfile));
+    }
 }
